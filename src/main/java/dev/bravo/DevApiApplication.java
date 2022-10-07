@@ -1,4 +1,4 @@
-package io.developer.restservice.devapi;
+package dev.bravo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DevApiApplication {
 
 	public static void main(String[] args) {
-		System.out.println(" starting rest server ...");
+		System.out.println("Starting rest server ...");
 		SpringApplication.run(DevApiApplication.class, args);
 	}
 
