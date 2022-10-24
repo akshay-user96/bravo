@@ -18,10 +18,12 @@ public class BravoApiController {
 
     @GetMapping("/autocomplete/word/{userId}/{prefixWord}")
     public Set<String> autocompleteWord(@PathVariable("userId") String userId,
-                                        @PathVariable("prefixWord") String prefixWord)
+                                        @PathVariable("prefixWord") String prefixWord,
+                                        @RequestParam("numOfRecommendations") Integer numOfRecommendations)
             throws UserDoesNotExistException {
-        logger.info("autoCompleteWord API called for userId: " + userId + " and prefixWord: " + prefixWord);
-        return recommendationManager.getRecommendation(userId, prefixWord);
+        logger.info("autoCompleteWord API called for userId: " + userId + " and prefixWord: " + prefixWord +
+                " numOfRecommendations: " + numOfRecommendations);
+        return recommendationManager.getRecommendation(userId, prefixWord, numOfRecommendations);
     }
 
     @PostMapping("/typed/word/{userId}/{word}")
