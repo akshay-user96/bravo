@@ -1,25 +1,23 @@
 package dev.bravo.autocomplete.dao.query.mapper;
 
-import dev.bravo.autocomplete.dao.entity.TrieNodeEntity;
+import dev.bravo.autocomplete.dao.entity.node.TrieNodeEntity;
 import dev.bravo.helper.Constants;
-import org.neo4j.driver.Record;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @Component
 public class RecordToEntityMapper {
     private final Logger logger = Logger.getLogger("RecordToEntityMapper");
-    public TrieNodeEntity mapRecordToTrieNodeEntity(Record record) {
-        if (record != null) {
+    public TrieNodeEntity mapRecordToTrieNodeEntity(Map<String, Object> recordMap) {
+        logger.info("mapRecordToTrieNodeEntity invoked with recordMap: " + recordMap);
+        if (recordMap != null) {
+            Map<String, Object> valueMap = (Map<String, Object>) recordMap.get("t");
             return TrieNodeEntity.builder()
-//                .id(record.get("t").get("id").asLong())     // TODO: How to fetch Id?
-                    .topRecommendations(record.get("t").get(Constants.topRecommendations).asList().stream()
-                            .map(Objects::toString)
-                            .collect(Collectors.toList()))
+                .id((Long)valueMap.get(Constants.id))
+                    //.recommendationScores(valueMap.get(Constants.recommendationScores))
                     .build();
         } else {
             return null;
