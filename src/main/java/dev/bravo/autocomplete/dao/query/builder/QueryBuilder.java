@@ -27,6 +27,11 @@ public class QueryBuilder {
         return this;
     }
 
+    public QueryBuilder where(String param) {
+        query += " WHERE " + param;
+        return this;
+    }
+
     public QueryBuilder return_(String param) {
         query += " RETURN " + param;
         return this;
